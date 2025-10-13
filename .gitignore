@@ -1,0 +1,32 @@
+# ******************************************************************************
+#
+# cs-data-structures, computer science data structures
+#
+# Copyright 2025 Jeremy A Gray <grayj2@wcslive.com>.
+#
+# All rights reserved.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# ******************************************************************************
+
+# Emacs.
+*.org
+*~
+.dir-locals.el
+
+# Python.
+*.egg-info
+*.pyc
+.coverage
+.hypothesis/
+.pytest_cache
+.python-version
+.tox
+.venv
+__pycache__
+build
+commit
+dist/
+docs/_build/
+htmlcov

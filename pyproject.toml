@@ -1,0 +1,144 @@
+# ******************************************************************************
+#
+# cs-data-structures, computer science data structures
+#
+# Copyright 2025 Jeremy A Gray <grayj2@wcslive.com>.
+#
+# All rights reserved.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# ******************************************************************************
+
+[build-system]
+
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.doc8]
+
+ignore-path = [
+  ".tox",
+  ".venv",
+]
+
+[tool.pccc]
+
+header_length = 50
+body_length = 72
+wrap = true
+force_wrap = true
+spell_check = false
+repair = false
+ignore_generated_commits = false
+
+types = [
+  "depends",
+  "doc",
+  "feat",
+  "fix",
+  "perf",
+  "refactor",
+  "release",
+  "style",
+  "test",
+]
+
+scopes = [
+  "ds",
+  "tooling",
+]
+
+footers = [
+  "github-closes",
+  "signed-off-by",
+]
+
+required_footers = [
+  "signed-off-by",
+]
+
+[tool.poetry]
+
+authors = [
+  "Jeremy A Gray <grayj2@wcslive.com>",
+]
+description = "computer science data structures"
+name = "cs-data-structures"
+version = "0.0.1"
+license = "GPL-3.0-or-later"
+maintainers = [
+  "Jeremy A Gray <grayj2@wcslive.com>",
+]
+readme = "README.rst"
+homepage = "https://github.com/jeremy-a-gray/cs-data-structures"
+repository = "https://github.com/jeremy-a-gray/cs-data-structures"
+
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+packages = [
+  { include = "ds" },
+]
+
+[tool.poetry.dependencies]
+
+python = ">=3.11.1,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+
+doc8 = ">=1"
+hypothesis = ">=6"
+pccc = ">=0"
+pre-commit = ">=3"
+pytest = ">=8"
+pytest-cov = ">=5"
+ruff = ">=0"
+sphinx = ">=8"
+tox = ">=4"
+
+[tool.poetry.urls]
+
+"Issues" = "https://github.com/jeremy-a-gray/cs-data-structures/issues"
+"Documentation" = "https://cs-data-structures.readthedocs.io/"
+"Repository" = "https://github.com/jeremy-a-gray/cs-data-structures"
+
+[tool.pytest.ini_options]
+
+pythonpath = [
+  ".",
+]
+
+[tool.ruff.lint]
+
+select = [
+  "B",
+  "C90",
+  "D",
+  "E",
+  "F",
+  "I",
+  "RUF",
+  "S",
+  "T20",
+  "W",
+]
+
+ignore = [
+  "D203",
+  "D213",
+]
+
+[tool.ruff.lint.per-file-ignores]
+
+"__init__.py" = [ "F401" ]
+
+"tests/**/*.py" = [
+    "S101",
+]
