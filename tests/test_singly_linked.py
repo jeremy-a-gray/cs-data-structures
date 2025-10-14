@@ -371,3 +371,27 @@ def test_should_reverse_empty():
 
     assert len(a) == 0
     assert a.head is None
+
+
+def test_should_reverse_one_item():
+    """Should reverse a one item list."""
+    a = List("one")
+    a.reverse()
+
+    assert len(a) == 1
+    assert a.head.record == "one"
+    assert a.head.next is None
+    assert hasattr(a.head, "prev") is False
+
+
+def test_should_reverse_many_items():
+    """Should reverse a many item list."""
+    a = List("one", "two", "three")
+    a.reverse()
+
+    assert len(a) == 3
+    assert a.head.record == "three"
+    assert a.head.next.record == "two"
+    assert a.head.next.next.record == "one"
+    assert a.head.next.next.next is None
+    assert hasattr(a.head, "prev") is False
