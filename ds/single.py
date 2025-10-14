@@ -77,18 +77,19 @@ class List:
         """Reverse the ``List``."""
         pass
 
-    def index(self, node):
-        """Find the index of ``Node`` ``node`` in the ``List``.
+    def index(self, record):
+        """Find the index of the ``Node`` matching ``record`` in the ``List``.
 
         Returns
         -------
         int
-            The zero-based index of the ``Node`` ``node`` in the ``List``.
+            The zero-based index of the ``Node`` matching ``record``
+            in the ``List``.  Returns -1 if ``record`` is not found.
 
         """
         pass
 
-    def head(self):
+    def find_head(self):
         """Find the head the ``List``.
 
         Returns
@@ -99,7 +100,7 @@ class List:
         """
         pass
 
-    def tail(self):
+    def find_tail(self):
         """Find the tail the ``List``.
 
         Returns
@@ -110,7 +111,7 @@ class List:
         """
         pass
 
-    def insert_before(self, node, record):
+    def insert_before(self, new, record):
         """Insert a ``Node`` in a ``List``.
 
         Insert ``Node`` ``node`` into the ``List`` before the ``Node``
@@ -121,39 +122,40 @@ class List:
         """
         pass
 
-    def insert_after(self, node, record):
+    def insert_after(self, new, record):
         """Insert a ``Node`` in a ``List``.
 
-        Insert ``Node`` ``node`` into the ``List`` after the ``Node``
-        with record ``record``.  If no record is given, then append
+        Insert ``new`` into the ``List`` after the ``Node`` with
+        record ``record``.  If no record is given, then append
         ``node`` onto the list.  If no record is found, then append
         ``node`` onto the list.
 
         """
         pass
 
-    def append(self, node):
-        """Append ``Node`` ``node`` onto the end of the ``List``."""
+    def append(self, record):
+        """Append ``record`` onto the end of the ``List``."""
         pass
 
-    def delete(self, node):
-        """Remove ``Node`` ``node`` from the ``List``.
+    def delete(self, record):
+        """Remove ``Node`` matching ``record`` from the ``List``.
 
         Returns
         -------
         Node
-            The removed node.
+            The removed node or ``None`` if no node removed.  Removes
+            the first ```Node`` matching ``record``.
 
         """
         pass
 
-    def pop(self, node):
-        """Remove ``Node`` ``node`` from the end of the ``List``.
+    def pop(self):
+        """Remove ``Node`` from the end of the ``List``.
 
         Returns
         -------
         Node
-            The removed node.
+            The removed node or ``None`` if empty.
 
         """
         pass
