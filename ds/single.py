@@ -18,17 +18,30 @@ from .node import Node  # noqa:  F401
 class List:
     """Represent a list."""
 
-    def __init__(self):
-        """Initialize the ``List``."""
-        pass
+    def __init__(self, *args):
+        """Initialize the ``List``.
+
+        Initialize the ``List``.  Append any items in ``args`` to the
+        list in order.
+
+        Parameters
+        ----------
+        args : list
+            Items to append to the list.
+
+        """
+        self.head = None
+
+        for item in args:
+            self.append(item)
 
     def __repr__(self):
         """Reproduce the ``List``."""
-        pass
+        return "List(" + ", ".join([f"'{item!s}'" for item in self]) + ")"
 
     def __str__(self):
         """Stringify the ``List``."""
-        pass
+        return "[" + ", ".join([f"'{item!s}'" for item in self]) + "]"
 
     def __len__(self):
         """Find the length of the ``List``.

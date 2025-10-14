@@ -16,17 +16,18 @@
 class Node:
     """Represent a node."""
 
-    def __init__(self):
+    def __init__(self, record):
         """Initialize a ``Node``."""
-        pass
+        self.record = record
+        self.next = None
 
     def __repr__(self):
         """Reproduce a ``Node``."""
-        pass
+        return f"Node({self.record!r})"
 
     def __str__(self):
         """Stringify a ``Node``."""
-        pass
+        return f"{self.record!s}"
 
 
 class DoublyLinkedNode:
