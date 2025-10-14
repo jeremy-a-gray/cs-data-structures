@@ -12,7 +12,7 @@
 
 """Singly-linked lists."""
 
-from .node import Node  # noqa:  F401
+from .node import Node
 
 
 class List:
@@ -52,15 +52,28 @@ class List:
             The length of the list.
 
         """
-        pass
+        # Empty list.
+        if self.isEmpty():
+            return 0
+
+        # Non-empty list.  Start at the head.
+        cur = self.head
+        length = 1
+
+        # Iterate until there is no next.
+        while cur.next is not None:
+            cur = cur.next
+            length += 1
+
+        return length
 
     def __iter__(self):
-        """Iterate over the list.
+        """Iterate over the list."""
+        cur = self.head
 
-        Iterate over the list to enable iterator protocol.
-
-        """
-        pass
+        while cur is not None:
+            yield cur
+            cur = cur.next
 
     def isEmpty(self):
         """Determine if the ``List`` is empty.
@@ -71,24 +84,37 @@ class List:
             ``True`` if the ``List`` is empty, ``False`` otherwise.
 
         """
-        pass
+        return True if self.head is None else False
 
     def reverse(self):
         """Reverse the ``List``."""
-        pass
+        if self.isEmpty():
+            return
 
-    def index(self, node):
-        """Find the index of ``Node`` ``node`` in the ``List``.
+    def index(self, record):
+        """Find the index of the ``Node`` matching ``record`` in the ``List``.
 
         Returns
         -------
         int
-            The zero-based index of the ``Node`` ``node`` in the ``List``.
+            The zero-based index of the ``Node`` matching ``record``
+            in the ``List``.  Returns -1 if ``record`` is not found.
 
         """
-        pass
+        ind = 0
+        cur = self.head
 
-    def head(self):
+        # Iterate until there is no next.
+        while cur is not None:
+            if cur.record == record:
+                return ind
+
+            cur = cur.next
+            ind += 1
+
+        return -1
+
+    def find_head(self):
         """Find the head the ``List``.
 
         Returns
@@ -97,9 +123,9 @@ class List:
             The head of the ``List``.
 
         """
-        pass
+        return self.head
 
-    def tail(self):
+    def find_tail(self):
         """Find the tail the ``List``.
 
         Returns
@@ -108,9 +134,20 @@ class List:
             The tail of the ``List``.
 
         """
-        pass
+        # Empty list.
+        if self.isEmpty():
+            return self.head
 
-    def insert_before(self, node, record):
+        # Non-empty list.  Start at the head.
+        cur = self.head
+
+        # Iterate until there is no next.
+        while cur.next is not None:
+            cur = cur.next
+
+        return cur
+
+    def insert_before(self, new, record):
         """Insert a ``Node`` in a ``List``.
 
         Insert ``Node`` ``node`` into the ``List`` before the ``Node``
@@ -119,41 +156,146 @@ class List:
         ``node`` onto the list.
 
         """
-        pass
+        node = Node(new)
 
-    def insert_after(self, node, record):
+        if self.isEmpty():
+            self.head = node
+            self.head.next = None
+            return
+
+        last = None
+        cur = self.head
+
+        # Iterate until there is no next.
+        while cur is not None:
+            if cur.record == record:
+                # Append the node.
+                if cur == self.head:
+                    node.next = self.head
+                    self.head = node
+                else:
+                    last.next = node
+                    node.next = cur
+
+                return
+
+            last = cur
+            cur = cur.next
+
+        # No match.
+        last.next = node
+        node.next = None
+
+        return
+
+    def insert_after(self, new, record):
         """Insert a ``Node`` in a ``List``.
 
-        Insert ``Node`` ``node`` into the ``List`` after the ``Node``
-        with record ``record``.  If no record is given, then append
+        Insert ``new`` into the ``List`` after the ``Node`` with
+        record ``record``.  If no record is given, then append
         ``node`` onto the list.  If no record is found, then append
         ``node`` onto the list.
 
         """
-        pass
+        node = Node(new)
 
-    def append(self, node):
-        """Append ``Node`` ``node`` onto the end of the ``List``."""
-        pass
+        if self.isEmpty():
+            self.head = node
+            self.head.next = None
+            return
 
-    def delete(self, node):
-        """Remove ``Node`` ``node`` from the ``List``.
+        last = None
+        cur = self.head
+
+        # Iterate until there is no next.
+        while cur is not None:
+            if cur.record == record:
+                # Append the node.
+                node.next = cur.next
+                cur.next = node
+
+                return
+
+            last = cur
+            cur = cur.next
+
+        # No match.
+        last.next = node
+        node.next = None
+
+        return
+
+    def append(self, record):
+        """Append ``record`` onto the end of the ``List``."""
+        node = Node(record)
+
+        # Empty list.
+        if self.isEmpty():
+            self.head = node
+            node.next = None
+            return
+
+        # Non-empty list; get the tail.
+        cur = self.find_tail()
+
+        # Append ``node`` and fix the tail.
+        cur.next = node
+        node.next = None
+
+    def delete(self, record):
+        """Remove ``Node`` matching ``record`` from the ``List``.
 
         Returns
         -------
         Node
-            The removed node.
+            The removed node or ``None`` if no node removed.  Removes
+            the first ```Node`` matching ``record``.
 
         """
-        pass
+        cur = self.head
+        last = None
 
-    def pop(self, node):
-        """Remove ``Node`` ``node`` from the end of the ``List``.
+        # Iterate until there is no next.
+        while cur is not None:
+            if cur.record == record:
+                # Delete the node.
+                if cur == self.head:
+                    self.head = self.head.next
+                else:
+                    last.next = cur.next
+
+                # Return the match.
+                return record
+
+            last = cur
+            cur = cur.next
+
+        # No match.
+        return None
+
+    def pop(self):
+        """Remove ``Node`` from the end of the ``List``.
 
         Returns
         -------
         Node
-            The removed node.
+            The removed node or ``None`` if empty.
 
         """
-        pass
+        # Empty list.
+        if self.isEmpty():
+            return None
+
+        # Non-empty list.  Start at the head.
+        cur = self.head
+
+        # Iterate until there is no next.
+        while cur.next is not None:
+            last = cur
+            cur = cur.next
+
+        # Fix tail.
+        last.next = None
+
+        # Return former tail.
+        return cur.record
