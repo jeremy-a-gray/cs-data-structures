@@ -91,6 +91,21 @@ class List:
         if self.isEmpty():
             return
 
+        last = None
+        next = None
+        cur = self.head
+
+        # Iterate over list.
+        while cur is not None:
+            next = cur.next
+            cur.next = last
+            last = cur
+            cur = next
+
+        self.head = last
+
+        return
+
     def index(self, record):
         """Find the index of the ``Node`` matching ``record`` in the ``List``.
 
