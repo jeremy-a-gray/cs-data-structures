@@ -56,12 +56,11 @@ class List:
         if self.isEmpty():
             return 0
 
-        # Non-empty list.  Start at the head.
+        # Traverse the list.
         cur = self.head
-        length = 1
+        length = 0
 
-        # Iterate until there is no next.
-        while cur.next is not None:
+        while cur is not None:
             cur = cur.next
             length += 1
 
@@ -116,6 +115,7 @@ class List:
             in the ``List``.  Returns -1 if ``record`` is not found.
 
         """
+        # Traverse the list.
         ind = 0
         cur = self.head
 
@@ -153,24 +153,24 @@ class List:
         if self.isEmpty():
             return self.head
 
-        # Non-empty list.  Start at the head.
+        # Traverse the list.
         cur = self.head
 
-        # Iterate until there is no next.
         while cur.next is not None:
             cur = cur.next
 
         return cur
 
-    def insert_before(self, new, record):
-        """Insert a ``Node`` in a ``List``.
+    def insert_before(self, new, record=None):
+        """Insert a ``Node`` into the ``List``.
 
-        Insert ``Node`` ``node`` into the ``List`` before the ``Node``
-        with record ``record``.  If no record is given, then prepend
-        ``node`` onto the list.  If no record is found, then append
-        ``node`` onto the list.
+        Insert a new ``Node`` with record ``new`` into the ``List``
+        before the ``Node`` with record ``record``.  If no record is
+        given, then prepend ``node`` onto the list.  If no record is
+        found, then append ``node`` onto the list.
 
         """
+        # Build the node.
         node = Node(new)
 
         if self.isEmpty():
@@ -178,10 +178,15 @@ class List:
             self.head.next = None
             return
 
+        if record is None:
+            node.next = self.head
+            self.head = node
+            return
+
+        # Traverse the list.
         last = None
         cur = self.head
 
-        # Iterate until there is no next.
         while cur is not None:
             if cur.record == record:
                 # Append the node.
@@ -203,15 +208,16 @@ class List:
 
         return
 
-    def insert_after(self, new, record):
-        """Insert a ``Node`` in a ``List``.
+    def insert_after(self, new, record=None):
+        """Insert a ``Node`` in the ``List``.
 
-        Insert ``new`` into the ``List`` after the ``Node`` with
-        record ``record``.  If no record is given, then append
-        ``node`` onto the list.  If no record is found, then append
-        ``node`` onto the list.
+        Insert a new ``Node`` with record ``new`` into the ``List``
+        after the ``Node`` with record ``record``.  If no record is
+        given, then append ``node`` onto the list.  If no record is
+        found, then append ``node`` onto the list.
 
         """
+        # Build the node.
         node = Node(new)
 
         if self.isEmpty():
@@ -219,10 +225,10 @@ class List:
             self.head.next = None
             return
 
+        # Traverse the list.
         last = None
         cur = self.head
 
-        # Iterate until there is no next.
         while cur is not None:
             if cur.record == record:
                 # Append the node.
@@ -241,7 +247,15 @@ class List:
         return
 
     def append(self, record):
-        """Append ``record`` onto the end of the ``List``."""
+        """Append ``record`` onto the end of the ``List``.
+
+        Parameters
+        ----------
+        record
+            The value to be appended to the list.
+
+        """
+        # Build the node.
         node = Node(record)
 
         # Empty list.
@@ -253,24 +267,27 @@ class List:
         # Non-empty list; get the tail.
         cur = self.find_tail()
 
-        # Append ``node`` and fix the tail.
+        # Append the node and fix the tail.
         cur.next = node
         node.next = None
+
+        return
 
     def delete(self, record):
         """Remove ``Node`` matching ``record`` from the ``List``.
 
         Returns
         -------
-        Node
-            The removed node or ``None`` if no node removed.  Removes
-            the first ```Node`` matching ``record``.
+        record
+            The ``record`` from the removed node or ``None`` if no
+            node was removed.  Removes the first ```Node`` matching
+            ``record``.
 
         """
+        # Traverse the list.
         cur = self.head
         last = None
 
-        # Iterate until there is no next.
         while cur is not None:
             if cur.record == record:
                 # Delete the node.
@@ -289,7 +306,7 @@ class List:
         return None
 
     def pop(self):
-        """Remove ``Node`` from the end of the ``List``.
+        """Remove the ``Node`` from the end of the ``List``.
 
         Returns
         -------
@@ -301,16 +318,21 @@ class List:
         if self.isEmpty():
             return None
 
-        # Non-empty list.  Start at the head.
+        # Traverse the list.
+        last_last = None
+        last = None
         cur = self.head
 
-        # Iterate until there is no next.
-        while cur.next is not None:
+        while cur is not None:
+            last_last = last
             last = cur
             cur = cur.next
 
         # Fix tail.
-        last.next = None
+        if last == self.head:
+            self.head = None
+        else:
+            last_last.next = None
 
         # Return former tail.
-        return cur.record
+        return last.record

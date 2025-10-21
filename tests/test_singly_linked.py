@@ -169,13 +169,37 @@ def test_should_pop_empty():
     assert a.pop() is None
 
 
-def test_should_pop_nonempty():
-    """Should pop a non-empty list."""
+def test_should_pop_nonempty_len_one():
+    """Should pop a non-empty, length one list."""
+    a = List("one")
+
+    tail = a.pop()
+    assert tail == "one"
+    assert len(a) == 0
+    assert a.head is None
+
+
+def test_should_pop_nonempty_len_two():
+    """Should pop a non-empty, length two list."""
+    a = List("one", "two")
+
+    tail = a.pop()
+    assert tail == "two"
+    assert len(a) == 1
+    assert a.head.record == "one"
+    assert a.head.next is None
+
+
+def test_should_pop_nonempty_len_three():
+    """Should pop a non-empty, length three list."""
     a = List("one", "two", "three")
 
     tail = a.pop()
     assert tail == "three"
     assert len(a) == 2
+    assert a.head.record == "one"
+    assert a.head.next.record == "two"
+    assert a.head.next.next is None
 
 
 def test_should_delete_empty():
@@ -298,6 +322,30 @@ def test_should_insert_after_nonempty_no_match():
     assert a.head.next.next.next.next is None
 
 
+def test_should_insert_after_none_empty():
+    """Should insert after no record with an empty list."""
+    a = List()
+    a.insert_after("one")
+
+    assert len(a) == 1
+    assert a.head.record == "one"
+    assert a.head.next is None
+
+
+def test_should_insert_after_none_nonempty():
+    """Should insert after no record on a non-empty list."""
+    a = List("one", "two", "three")
+
+    a.insert_after("zero")
+
+    assert len(a) == 4
+    assert a.head.record == "one"
+    assert a.head.next.record == "two"
+    assert a.head.next.next.record == "three"
+    assert a.head.next.next.next.record == "zero"
+    assert a.head.next.next.next.next is None
+
+
 def test_should_insert_before_empty():
     """Should insert before with an empty list."""
     a = List()
@@ -361,6 +409,30 @@ def test_should_insert_before_nonempty_no_match():
     assert a.head.next.record == "two"
     assert a.head.next.next.record == "three"
     assert a.head.next.next.next.record == "zero"
+    assert a.head.next.next.next.next is None
+
+
+def test_should_insert_before_none_empty():
+    """Should insert before no record with an empty list."""
+    a = List()
+    a.insert_before("one")
+
+    assert len(a) == 1
+    assert a.head.record == "one"
+    assert a.head.next is None
+
+
+def test_should_insert_before_none_nonempty():
+    """Should insert before no record on a non-empty."""
+    a = List("one", "two", "three")
+
+    a.insert_before("zero")
+
+    assert len(a) == 4
+    assert a.head.record == "zero"
+    assert a.head.next.record == "one"
+    assert a.head.next.next.record == "two"
+    assert a.head.next.next.next.record == "three"
     assert a.head.next.next.next.next is None
 
 
