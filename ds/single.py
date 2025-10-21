@@ -112,29 +112,36 @@ class List:
         pass
 
     def insert_before(self, new, record):
-        """Insert a ``Node`` in a ``List``.
+        """Insert a ``Node`` into the ``List``.
 
-        Insert ``Node`` ``node`` into the ``List`` before the ``Node``
-        with record ``record``.  If no record is given, then prepend
-        ``node`` onto the list.  If no record is found, then append
-        ``node`` onto the list.
+        Insert a new ``Node`` with record ``new`` into the ``List``
+        before the ``Node`` with record ``record``.  If no record is
+        given, then prepend ``node`` onto the list.  If no record is
+        found, then append ``node`` onto the list.
 
         """
         pass
 
     def insert_after(self, new, record):
-        """Insert a ``Node`` in a ``List``.
+        """Insert a ``Node`` in the ``List``.
 
-        Insert ``new`` into the ``List`` after the ``Node`` with
-        record ``record``.  If no record is given, then append
-        ``node`` onto the list.  If no record is found, then append
-        ``node`` onto the list.
+        Insert a new ``Node`` with record ``new`` into the ``List``
+        after the ``Node`` with record ``record``.  If no record is
+        given, then append ``node`` onto the list.  If no record is
+        found, then append ``node`` onto the list.
 
         """
         pass
 
     def append(self, record):
-        """Append ``record`` onto the end of the ``List``."""
+        """Append ``record`` onto the end of the ``List``.
+
+        Parameters
+        ----------
+        record
+            The value to be appended to the list.
+
+        """
         pass
 
     def delete(self, record):
@@ -142,15 +149,16 @@ class List:
 
         Returns
         -------
-        Node
-            The removed node or ``None`` if no node removed.  Removes
-            the first ```Node`` matching ``record``.
+        record
+            The ``record`` from the removed node or ``None`` if no
+            node was removed.  Removes the first ```Node`` matching
+            ``record``.
 
         """
         pass
 
     def pop(self):
-        """Remove ``Node`` from the end of the ``List``.
+        """Remove the ``Node`` from the end of the ``List``.
 
         Returns
         -------
