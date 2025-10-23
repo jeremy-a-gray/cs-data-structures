@@ -58,8 +58,8 @@ class Stack:
     def __iter__(self):
         """Iterate over the ``Stack``.
 
-        Iterate over the stack from head to tail by popping to enable
-        iterator protocol.
+        Iterate over the stack from head to tail to enable iterator
+        protocol.
 
         """
         pass
@@ -87,12 +87,12 @@ class Stack:
         pass
 
     def pop(self):
-        """Pop the head from a ``Stack``.
+        """Pop the tail from the ``Stack``.
 
         Returns
         -------
         record
-            The record from the head of the stack.
+            The record from the tail from the stack.
 
         """
         pass
