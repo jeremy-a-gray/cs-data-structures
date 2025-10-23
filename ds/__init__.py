@@ -15,4 +15,6 @@
 from .circular import CircularlyLinkedList
 from .double import DoublyLinkedList
 from .node import DoublyLinkedNode, Node
+from .queue import Queue
 from .single import List
+from .stack import Stack

@@ -12,7 +12,7 @@
 
 """List node tests."""
 
-from ds import Node
+from ds import DoublyLinkedNode, Node
 
 
 def test_should_stringify_node():
@@ -25,7 +25,7 @@ def test_should_reproduce_node():
     assert repr(Node("one")) == "Node('one')"
 
 
-def test_should_contain_record():
+def test_node_should_contain_record():
     """Should contain a record."""
     a = Node("one")
 
@@ -33,9 +33,43 @@ def test_should_contain_record():
     assert a.record == "one"
 
 
-def test_should_contain_next():
+def test_node_should_contain_next():
     """Should contain a next reference."""
     a = Node("one")
+
+    assert hasattr(a, "next")
+    assert a.next is None
+
+
+def test_should_stringify_doubly_linked_node():
+    """Should stringify a ``DoublyLinkedNode``."""
+    assert str(DoublyLinkedNode("one")) == "one"
+
+
+def test_should_reproduce_doubly_linked_node():
+    """Should reproduce a ``DoublyLinkedNode``."""
+    assert repr(DoublyLinkedNode("one")) == "DoublyLinkedNode('one')"
+
+
+def test_doubly_linked_node_should_contain_record():
+    """Should contain a record."""
+    a = DoublyLinkedNode("one")
+
+    assert hasattr(a, "record")
+    assert a.record == "one"
+
+
+def test_doubly_linked_node_should_contain_prev():
+    """Should contain a prev reference."""
+    a = DoublyLinkedNode("one")
+
+    assert hasattr(a, "prev")
+    assert a.prev is None
+
+
+def test_doubly_linked_node_should_contain_next():
+    """Should contain a next reference."""
+    a = DoublyLinkedNode("one")
 
     assert hasattr(a, "next")
     assert a.next is None

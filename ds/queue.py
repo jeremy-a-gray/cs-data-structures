@@ -58,8 +58,8 @@ class Queue:
     def __iter__(self):
         """Iterate over the ``Queue``.
 
-        Iterate over the queue from head to tail by dequeuing to
-        enable iterator protocol.
+        Iterate over the stack from head to tail to enable iterator
+        protocol.
 
         """
         pass

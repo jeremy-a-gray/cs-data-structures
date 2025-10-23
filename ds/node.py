@@ -56,12 +56,14 @@ class DoublyLinkedNode:
             The value to be stored in the node.
 
         """
-        pass
+        self.record = record
+        self.prev = None
+        self.next = None
 
     def __repr__(self):
         """Reproduce a ``DoublyLinkedNode``."""
-        pass
+        return f"DoublyLinkedNode({self.record!r})"
 
     def __str__(self):
         """Stringify a ``DoublyLinkedNode``."""
-        pass
+        return f"{self.record!s}"
