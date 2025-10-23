@@ -12,7 +12,7 @@
 
 """Queues."""
 
-from .node import DoublyLinkedNode  # noqa:  F401
+from .node import DoublyLinkedNode
 
 
 class Queue:
@@ -53,7 +53,14 @@ class Queue:
             The length of the queue.
 
         """
-        pass
+        cur = self.head
+        count = 0
+
+        while cur is not None:
+            count += 1
+            cur = cur.next
+
+        return count
 
     def __iter__(self):
         """Iterate over the ``Queue``.
@@ -62,7 +69,13 @@ class Queue:
         protocol.
 
         """
-        pass
+        cur = self.head
+
+        while cur is not None:
+            yield cur
+            cur = cur.next
+
+        return
 
     def isEmpty(self):
         """Determine if the ``Queue`` is empty.
@@ -73,7 +86,7 @@ class Queue:
             ``True`` if the ``Queue`` is empty, ``False`` otherwise.
 
         """
-        pass
+        return True if len(self) == 0 else False
 
     def enqueue(self, record):
         """Enqueue a ``record`` onto the tail of a ``Queue``.
@@ -84,7 +97,22 @@ class Queue:
             The record to be enqueued.
 
         """
-        pass
+        # Build the node.
+        node = DoublyLinkedNode(record)
+
+        # Push onto the tail.
+        node.prev = self.tail
+        node.next = None
+        self.tail = node
+
+        if self.head is None:
+            # List was empty; set head to node.
+            self.head = node
+        else:
+            # List was not empty; fix next of old tail.
+            node.prev.next = node
+
+        return
 
     def dequeue(self):
         """Dequeue the head of a ``Queue``.
@@ -95,4 +123,16 @@ class Queue:
             The record from the head of the queue.
 
         """
-        pass
+        if self.head is None:
+            return None
+
+        record = self.head.record
+
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            self.head.next.prev = None
+            self.head = self.head.next
+
+        return record

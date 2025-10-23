@@ -12,7 +12,7 @@
 
 """Stacks."""
 
-from .node import DoublyLinkedNode  # noqa:  F401
+from .node import DoublyLinkedNode
 
 
 class Stack:
@@ -53,7 +53,14 @@ class Stack:
             The length of the stack.
 
         """
-        pass
+        cur = self.head
+        count = 0
+
+        while cur is not None:
+            count += 1
+            cur = cur.next
+
+        return count
 
     def __iter__(self):
         """Iterate over the ``Stack``.
@@ -62,7 +69,13 @@ class Stack:
         protocol.
 
         """
-        pass
+        cur = self.head
+
+        while cur is not None:
+            yield cur
+            cur = cur.next
+
+        return
 
     def isEmpty(self):
         """Determine if the ``Stack`` is empty.
@@ -73,7 +86,7 @@ class Stack:
             ``True`` if the ``Stack`` is empty, ``False`` otherwise.
 
         """
-        pass
+        return True if len(self) == 0 else False
 
     def push(self, record):
         """Push a ``record`` onto a ``Stack``.
@@ -84,7 +97,22 @@ class Stack:
             The record to be pushed onto the head of stack.
 
         """
-        pass
+        # Build the node.
+        node = DoublyLinkedNode(record)
+
+        # Push onto the tail.
+        node.prev = self.tail
+        node.next = None
+        self.tail = node
+
+        if self.head is None:
+            # List was empty; set head to node.
+            self.head = node
+        else:
+            # List was not empty; fix next of old tail.
+            node.prev.next = node
+
+        return
 
     def pop(self):
         """Pop the tail from the ``Stack``.
@@ -95,4 +123,16 @@ class Stack:
             The record from the tail from the stack.
 
         """
-        pass
+        if self.tail is None:
+            return None
+
+        record = self.tail.record
+
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail.prev.next = None
+            self.tail = self.tail.prev
+
+        return record
