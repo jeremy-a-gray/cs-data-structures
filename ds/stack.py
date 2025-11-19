@@ -12,7 +12,7 @@
 
 """Stacks."""
 
-from .node import DoublyLinkedNode
+from .node import Node
 
 
 class Stack:
@@ -94,23 +94,23 @@ class Stack:
         Parameters
         ----------
         record
-            The record to be pushed onto the head of stack.
+            The record to be pushed onto the tail of stack.
 
         """
         # Build the node.
-        node = DoublyLinkedNode(record)
+        node = Node(record)
 
         # Push onto the tail.
-        node.prev = self.tail
-        node.next = None
-        self.tail = node
 
-        if self.head is None:
-            # List was empty; set head to node.
+        # Empty list.
+        if self.isEmpty():
             self.head = node
-        else:
-            # List was not empty; fix next of old tail.
-            node.prev.next = node
+            self.tail = node
+            return
+
+        # Non-empty list; append the node and fix the tail.
+        self.tail.next = node
+        self.tail = node
 
         return
 
@@ -123,16 +123,30 @@ class Stack:
             The record from the tail from the stack.
 
         """
+        # Empty stack.
         if self.tail is None:
             return None
 
         record = self.tail.record
 
         if self.head == self.tail:
+            # Length one stack.
             self.head = None
             self.tail = None
         else:
-            self.tail.prev.next = None
-            self.tail = self.tail.prev
+            # Length many stack.
+
+            # Traverse the list.
+            cur = self.head
+            last = None
+            before = None
+
+            while cur is not None:
+                before = last
+                last = cur
+                cur = cur.next
+
+            self.tail = before
+            self.tail.next = None
 
         return record

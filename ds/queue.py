@@ -12,7 +12,7 @@
 
 """Queues."""
 
-from .node import DoublyLinkedNode
+from .node import Node
 
 
 class Queue:
@@ -98,19 +98,17 @@ class Queue:
 
         """
         # Build the node.
-        node = DoublyLinkedNode(record)
+        node = Node(record)
 
-        # Push onto the tail.
-        node.prev = self.tail
-        node.next = None
-        self.tail = node
-
-        if self.head is None:
-            # List was empty; set head to node.
+        # Empty list.
+        if self.isEmpty():
             self.head = node
-        else:
-            # List was not empty; fix next of old tail.
-            node.prev.next = node
+            self.tail = node
+            return
+
+        # Non-empty list; append the node and fix the tail.
+        self.tail.next = node
+        self.tail = node
 
         return
 
@@ -123,16 +121,18 @@ class Queue:
             The record from the head of the queue.
 
         """
+        # Empty queue.
         if self.head is None:
             return None
 
         record = self.head.record
 
         if self.head == self.tail:
+            # Length one queue.
             self.head = None
             self.tail = None
         else:
-            self.head.next.prev = None
+            # Length many queue.
             self.head = self.head.next
 
         return record
