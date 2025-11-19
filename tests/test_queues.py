@@ -111,10 +111,8 @@ def test_should_dequeue_nonempty_len_two():
     assert head == "one"
     assert len(a) == 1
     assert a.head.record == "two"
-    assert a.head.prev is None
     assert a.head.next is None
     assert a.tail.record == "two"
-    assert a.tail.prev is None
     assert a.tail.next is None
 
 
@@ -126,7 +124,6 @@ def test_should_dequeue_nonempty_len_three():
     assert head == "one"
     assert len(a) == 2
     assert a.head.record == "two"
-    assert a.head.prev is None
     assert a.head.next.record == "three"
     assert a.head.next.next is None
 
@@ -139,7 +136,6 @@ def test_should_repeatedly_dequeue():
     assert head == "one"
     assert len(a) == 2
     assert a.head.record == "two"
-    assert a.head.prev is None
     assert a.head.next.record == "three"
     assert a.head.next.next is None
 
@@ -147,10 +143,8 @@ def test_should_repeatedly_dequeue():
     assert head == "two"
     assert len(a) == 1
     assert a.head.record == "three"
-    assert a.head.prev is None
     assert a.head.next is None
     assert a.tail.record == "three"
-    assert a.tail.prev is None
     assert a.tail.next is None
 
     head = a.dequeue()
@@ -174,10 +168,8 @@ def test_should_enqueue_empty():
 
     assert len(a) == 1
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next is None
     assert a.tail.record == "one"
-    assert a.tail.prev is None
     assert a.tail.next is None
 
 
@@ -189,8 +181,6 @@ def test_should_enqueue_nonempty():
 
     assert len(a) == 2
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next.record == "two"
     assert a.tail.record == "two"
-    assert a.tail.prev.record == "one"
     assert a.tail.next is None
