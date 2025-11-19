@@ -170,7 +170,6 @@ class DoublyLinkedList:
         # Empty list.
         if self.isEmpty():
             self.append(new)
-
             return
 
         # Prepend on no record.

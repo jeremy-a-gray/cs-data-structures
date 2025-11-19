@@ -174,11 +174,9 @@ class List:
         node = Node(new)
 
         if self.isEmpty():
-            self.head = node
-            self.head.next = None
+            self.append(new)
             return
-
-        if record is None:
+        elif record is None:
             node.next = self.head
             self.head = node
             return
@@ -189,13 +187,17 @@ class List:
 
         while cur is not None:
             if cur.record == record:
-                # Append the node.
+                # Prepend the node.
+
+                # Head.
                 if cur == self.head:
-                    node.next = self.head
-                    self.head = node
-                else:
-                    last.next = node
                     node.next = cur
+                    self.head = node
+                    return
+
+                # Middle and tail.
+                last.next = node
+                node.next = cur
 
                 return
 
@@ -203,8 +205,7 @@ class List:
             cur = cur.next
 
         # No match.
-        last.next = node
-        node.next = None
+        self.append(new)
 
         return
 
@@ -221,12 +222,10 @@ class List:
         node = Node(new)
 
         if self.isEmpty():
-            self.head = node
-            self.head.next = None
+            self.append(new)
             return
 
         # Traverse the list.
-        last = None
         cur = self.head
 
         while cur is not None:
@@ -237,12 +236,10 @@ class List:
 
                 return
 
-            last = cur
             cur = cur.next
 
         # No match.
-        last.next = node
-        node.next = None
+        self.append(new)
 
         return
 
