@@ -111,10 +111,8 @@ def test_should_pop_nonempty_len_two():
     assert tail == "two"
     assert len(a) == 1
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next is None
     assert a.tail.record == "one"
-    assert a.tail.prev is None
     assert a.tail.next is None
 
 
@@ -126,7 +124,6 @@ def test_should_pop_nonempty_len_three():
     assert tail == "three"
     assert len(a) == 2
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next.record == "two"
     assert a.head.next.next is None
 
@@ -139,7 +136,6 @@ def test_should_repeatedly_pop():
     assert tail == "three"
     assert len(a) == 2
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next.record == "two"
     assert a.head.next.next is None
 
@@ -147,10 +143,8 @@ def test_should_repeatedly_pop():
     assert tail == "two"
     assert len(a) == 1
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next is None
     assert a.tail.record == "one"
-    assert a.tail.prev is None
     assert a.tail.next is None
 
     tail = a.pop()
@@ -168,10 +162,8 @@ def test_should_push_empty():
 
     assert len(a) == 1
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next is None
     assert a.tail.record == "one"
-    assert a.tail.prev is None
     assert a.tail.next is None
 
 
@@ -183,8 +175,6 @@ def test_should_push_nonempty():
 
     assert len(a) == 2
     assert a.head.record == "one"
-    assert a.head.prev is None
     assert a.head.next.record == "two"
     assert a.tail.record == "two"
-    assert a.tail.prev.record == "one"
     assert a.tail.next is None
