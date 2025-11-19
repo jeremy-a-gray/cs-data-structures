@@ -81,7 +81,7 @@ class Stack:
         Parameters
         ----------
         record
-            The record to be pushed onto the head of stack.
+            The record to be pushed onto the tail of stack.
 
         """
         pass
